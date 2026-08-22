@@ -1,5 +1,7 @@
 # Loa22 druggability assessment — analysis code and data
 
+[![DOI](https://zenodo.org/badge/1342212159.svg)](https://doi.org/10.5281/zenodo.22054886)
+
 Code and data supporting:
 
 > **Spatial dissociation between the druggable pocket and the functional
