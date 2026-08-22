@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the associated manuscript."
+title: "Loa22 druggability assessment — analysis code and data"
+version: 1.0.0
+date-released: 2026-08-22
+license: MIT
+repository-code: "https://github.com/REPLACE_WITH_USERNAME/loa22-druggability"
+abstract: >-
+  Analysis code and data supporting a computational assessment of the
+  druggability of the Leptospira interrogans Loa22 peptidoglycan-binding site.
+  Includes cavity detection, generative molecular design with an
+  untrained-prior control, dual-site docking of the resulting libraries,
+  molecular dynamics simulations, and end-state free energy calculations.
+authors:
+  - family-names: "Mollasgo"
+    given-names: "Andrea Gail O."
+    affiliation: "Mapua University, Manila, Philippines"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: "Cunanan"
+    given-names: "Donmig J."
+    affiliation: "Mapua University, Manila, Philippines"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: "Cunanan"
+    given-names: "Dianne J."
+    affiliation: "Mapua University, Manila, Philippines"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+keywords:
+  - leptospirosis
+  - Leptospira interrogans
+  - Loa22
+  - druggability
+  - generative chemistry
+  - reinforcement learning
+  - molecular dynamics
+  - anti-virulence

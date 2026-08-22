@@ -1,0 +1,28 @@
+Binding free energy with per-residue decomposition
+
+&general
+  sys_name             = "Loa22_dual_site"
+  startframe           = 2501
+  endframe             = 5001
+  interval             = 25
+  verbose              = 2
+  forcefields          = "leaprc.protein.ff14SB,leaprc.gaff2"
+  PBRadii              = 3
+/
+
+&gb
+  igb                  = 5
+  saltcon              = 0.150
+/
+
+&pb
+  istrng               = 0.150
+  inp                  = 1
+  radiopt              = 1
+/
+
+&decomp
+  idecomp              = 2
+  dec_verbose          = 0
+  print_res            = "within 6"
+/

@@ -1,0 +1,34 @@
+; NVT equilibration - 500 ps, RESTRAINED   (FIX 1, FIX 6)
+define                   = -DPOSRES -DPOSRES_LIG
+integrator               = md
+nsteps                   = 250000
+dt                       = 0.002
+nstxout-compressed       = 5000
+nstenergy                = 1000
+nstlog                   = 1000
+continuation             = no
+constraint_algorithm     = lincs
+constraints              = h-bonds
+lincs_iter               = 1
+lincs_order              = 4
+nstlist                  = 10
+; FIX 2 - CHARMM36 requires force-switched LJ, no DispCorr
+cutoff-scheme            = Verlet
+coulombtype              = PME
+pme_order                = 4
+fourierspacing           = 0.16
+rcoulomb                 = 1.2
+vdwtype                  = cutoff
+vdw-modifier             = force-switch
+rvdw-switch              = 1.0
+rvdw                     = 1.2
+DispCorr                 = no
+tcoupl                   = V-rescale
+tc-grps                  = Protein_LIG Water_and_ions
+tau_t                    = 0.1     0.1
+ref_t                    = 310     310
+pcoupl                   = no
+pbc                      = xyz
+gen_vel                  = yes
+gen_temp                 = 310
+gen_seed                 = 42

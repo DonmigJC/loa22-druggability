@@ -1,0 +1,24 @@
+# Trajectory and binary simulation output — too large for version control
+*.xtc
+*.trr
+*.edr
+*.cpt
+*.tpr
+*.gro
+*.prmtop
+*.inpcrd
+
+# GROMACS backup files
+\#*\#
+*.bak
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Logs and scratch
+*.log
+nohup.out
+/tmp/
