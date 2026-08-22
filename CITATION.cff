@@ -4,7 +4,7 @@ title: "Loa22 druggability assessment — analysis code and data"
 version: 1.0.0
 date-released: 2026-08-22
 license: MIT
-repository-code: "https://github.com/REPLACE_WITH_USERNAME/loa22-druggability"
+repository-code: "https://github.com/DonmigJC/loa22-druggability"
 abstract: >-
   Analysis code and data supporting a computational assessment of the
   druggability of the Leptospira interrogans Loa22 peptidoglycan-binding site.
