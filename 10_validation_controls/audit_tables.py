@@ -134,13 +134,18 @@ print("=" * 100)
 pr = load(os.path.join(R, "prior_control", "prior_docked.csv"))
 print("  rows in prior_docked.csv: %d" % len(pr))
 aff = np.array([f(r, "affinity") for r in pr if f(r, "affinity") is not None])
-qed = np.array([f(r, "QED") for r in pr if f(r, "QED") is not None])
+# Table 1 reports every statistic over the 6,049 molecules that docked,
+# so the QED mean has to come from the same rows, not from all 6,083
+# that carry a QED value.
+qed = np.array([f(r, "QED") for r in pr
+                if f(r, "QED") is not None and f(r, "affinity") is not None])
 chk_int("prior molecules with an affinity", len(aff), 6049)
 chk("prior mean affinity (kcal/mol)", float(aff.mean()), -6.556, 0.002)
 chk("prior median affinity (kcal/mol)", float(np.median(aff)), -6.632, 0.002)
 chk("prior best single molecule (kcal/mol)", float(aff.min()), -12.160, 0.002)
 chk("prior 25th percentile (kcal/mol)", float(np.percentile(aff, 25)), -7.318, 0.01)
 chk("prior 10th percentile (kcal/mol)", float(np.percentile(aff, 10)), -7.909, 0.01)
+chk_int("prior molecules with both a QED and an affinity", len(qed), 6049)
 chk("prior mean QED", float(qed.mean()), 0.618, 0.001)
 DOXY = -6.862
 print("  %-62s got %9.3f%%   paper    41.08%%"

@@ -10,7 +10,7 @@ Claims checked (manuscript v21):
   2.1                                 : Asp121 side-chain centroid 16.27 A from
                                         the P0 docking box centre, box
                                         half-width 12.5 A, so not enclosed
-  2.1                                 : P4 Drug Score 0.38 "ranks fourth of six"
+  2.1                                 : P4 Drug Score 0.38 "ranks third of six"
   2.1 / 3.1                           : two of the ten CDD residues fall
                                         outside every detected cavity
 """
@@ -127,8 +127,8 @@ print("DRUG SCORE RANKING OF P4")
 order = sorted(DRUGSCORE.items(), key=lambda kv: -kv[1])
 print("    descending: " + ", ".join("P%d=%.2f" % (k, v) for k, v in order))
 rank = [k for k, _ in order].index(4) + 1
-print("    P4 Drug Score 0.38 ranks %d of 6.   paper says 'fourth of the six'   %s"
-      % (rank, "OK" if rank == 4 else "MISMATCH"))
+print("    P4 Drug Score 0.38 ranks %d of 6.   paper says 'third of the six'   %s"
+      % (rank, "OK" if rank == 3 else "MISMATCH"))
 print()
 
 print("CDD RESIDUES OUTSIDE EVERY CAVITY")

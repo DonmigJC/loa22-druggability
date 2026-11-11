@@ -1,10 +1,17 @@
 cff-version: 1.2.0
 message: "If you use this code or data, please cite the associated manuscript."
-title: "Loa22 druggability assessment — analysis code and data"
-version: 1.0.0
-date-released: 2026-08-22
+title: "Loa22 druggability assessment: analysis code and data"
+version: 1.1.0
+date-released: 2026-11-11
 license: MIT
 repository-code: "https://github.com/DonmigJC/loa22-druggability"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22054886"
+    description: "Concept DOI, resolves to the current version"
+  - type: doi
+    value: "10.5281/zenodo.22054887"
+    description: "Version DOI, v1.0.0"
 abstract: >-
   Analysis code and data supporting a computational assessment of the
   druggability of the Leptospira interrogans Loa22 peptidoglycan-binding site.
@@ -15,15 +22,15 @@ authors:
   - family-names: "Mollasgo"
     given-names: "Andrea Gail O."
     affiliation: "Mapua University, Manila, Philippines"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    orcid: "https://orcid.org/0009-0003-8693-4110"
   - family-names: "Cunanan"
     given-names: "Donmig J."
     affiliation: "Mapua University, Manila, Philippines"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    orcid: "https://orcid.org/0009-0004-3667-5496"
   - family-names: "Cunanan"
     given-names: "Dianne J."
     affiliation: "Mapua University, Manila, Philippines"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    orcid: "https://orcid.org/0009-0002-6688-1528"
 keywords:
   - leptospirosis
   - Leptospira interrogans
