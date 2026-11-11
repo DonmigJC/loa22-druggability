@@ -1,0 +1,16 @@
+integrator               = steep
+emtol                    = 1000.0
+nsteps                   = 5000
+nstlist                  = 10
+; FIX 2 - CHARMM36 requires force-switched LJ, no DispCorr
+cutoff-scheme            = Verlet
+coulombtype              = PME
+pme_order                = 4
+fourierspacing           = 0.16
+rcoulomb                 = 1.2
+vdwtype                  = cutoff
+vdw-modifier             = force-switch
+rvdw-switch              = 1.0
+rvdw                     = 1.2
+DispCorr                 = no
+pbc                      = xyz

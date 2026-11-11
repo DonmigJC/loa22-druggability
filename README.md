@@ -127,6 +127,19 @@ force-switched non-bonded treatment with dispersion correction disabled, TIP3P
 water, 150 mM NaCl, position restraints active through both equilibration
 stages, and the C-rescale barostat.
 
+`apo_v2/` holds the ligand-free build that replaces the original apo run. The
+original used SPC/E water with two chloride ions for neutrality and no added
+salt, at 300 K, which does not match the protocol Methods states for every
+other system. `build_apo_v2.sh` rebuilds it under the same protocol as the
+ligand systems: CHARMM36 with TIP3P, 150 mM NaCl by `genion -neutral
+-conc 0.15`, 500 ps NVT and 2 ns NPT restrained, 100 ns production at 310 K.
+The only deliberate difference is the temperature-coupling group, `Protein
+Non-Protein` rather than `Protein_LIG Water_and_ions`, because there is no
+ligand to merge into the solute group; these are default groups, so no custom
+index file is needed. The build lands on 117,193 atoms with NA 109 and CL 112,
+against 117,185, NA 109 and CL 112 for the ligand systems. The script verifies
+the water model and the salt before it will run a replicate.
+
 ### 07_md_production — Methods §2.17
 
 `run_md_production.sh` runs equilibration and production with per-replicate
@@ -136,6 +149,21 @@ state, so replicates differ in initial conditions and not only in trajectory
 divergence.
 
 `run_apo_md.sh` runs the ligand-free control simulation.
+
+`md_docked_replicates.sh` adds the second and third docked-pose replicates,
+reusing every build input from the first and changing only `gen_seed` in
+`nvt.mdp`, so the three differ in initial velocities and nothing else.
+
+`run_queue_resumable.sh` is the only thing that should be used to restart the
+campaign after an interruption. Both driver scripts skip a replicate only when
+`md_prod.gro` exists, and a run killed mid-production has none, so calling a
+driver directly would restart that replicate from NVT and discard its
+checkpoint. The wrapper resumes partial production first, then calls the
+drivers in order. It takes an `flock` and refuses to start while any `gmx`
+process is alive, so it cannot create a second `mdrun`.
+
+`md_watch.sh` and `apo_watch.sh` report progress and an estimated finish time.
+They only read files and are safe to run against a live campaign.
 
 ### 08_md_analysis — Methods §2.18
 
@@ -150,6 +178,20 @@ from the PDB residue name and number jointly.
 
 `where_is_ligand.py` was the first corrected analysis and is retained for
 reference. `analyse_apo.sh` analyses the ligand-free control.
+
+`md_replicate_analysis.sh` applies the same `gmx mindist` measurement to the
+new replicates that was used for the first, so the series are comparable.
+
+`summarize_docked_replicates.py` reports, per replicate, the trajectory length,
+the first crossing of the 4.5 Å contact threshold, the final departure and the
+fraction of frames in contact. It separates the first crossing from the final
+departure deliberately, because a brief excursion is not a departure.
+
+`analyse_conformational_stability_v2.sh` and
+`summarize_conformational_stability.py` rebuild the conformational-stability
+table from the v2 trajectories. The summary script recomputes the four
+originally submitted rows from the v1 files first, so the statistics code is
+checked against known values before any new figure is trusted.
 
 ### 09_free_energy — Methods §2.19
 
@@ -171,15 +213,45 @@ verified.
 decoys (Morgan fingerprint Tanimoto < 0.30) and tests whether the bridging
 metric is confounded by molecular size.
 
+`audit_geometry.py`, `audit_tables.py` and `audit_t3_mmpbsa.py` recompute every
+claim in the manuscript that is reachable from the files in this repository,
+including the cavity geometry, all of the docking tables and the end-state free
+energies. They were written to check the paper rather than to produce it, and
+are included so that a reader can run the same check.
+
 ### figures
 
 Scripts generating the manuscript figures. `fig2.pml` requires the open-source
 PyMOL build; the educational build's licence excludes publication figures.
 
+`fig6C_occupancy.py` replaces `fig6C.py` for panel C of the dynamics figure.
+The earlier script hardcoded bridging counts from a 21-frame sample taken at
+5 ns intervals; the panel now plots occupancy evaluated at every frame, on the
+same basis as the main-text table. Nothing is hardcoded: it reads the distance
+series, computes the occupancies and writes no file unless all three compounds
+reproduce the published values. It also refuses any pair of distance series
+whose lengths disagree, which guards against the truncated analysis files noted
+under Known limitations.
+
+`frontiers_export.py` wraps a figure script and enforces the submission figure
+rules before writing: minimum 8 pt text, 2 pt data lines, 180 mm width, RGB
+TIFF with LZW compression. Export resolution is read from `EXPORT_DPI`. Every
+submitted TIFF was produced through it, so it is required to regenerate them.
+
+`fig1.py`, `figS1.py` and `fig2A_polish.pml` generate the workflow figure, the
+sequence-alignment figure and the final version of panel A of the cavity
+figure.
+
 ### superseded
 
 Earlier script versions retained for transparency, each replaced because it
 produced an incorrect result. See `superseded/README.md`.
+
+`superseded/md_apo_replicates.sh` was written to add replicates to the original
+apo run before that build was checked. It would have copied the SPC/E topology
+and the missing salt into two new trajectories. It is kept because the attempt
+is part of the record, and it now refuses to run against any build whose
+topology includes `spce.itp` or carries no sodium.
 
 ---
 
@@ -198,6 +270,7 @@ produced an incorrect result. See `superseded/README.md`.
 | `data/docking/final_leads.csv` | Selected compounds | 3 |
 | `data/docking/decoy_results.csv` | Decoy validation | 60 |
 | `data/docking/pgn_control.csv` | Peptidoglycan fragments | 3 |
+| `tables/SupplementaryTableS15.csv` | Affinity against molecular weight and drug-likeness | 6,275 |
 | `data/md_summary/` | MM-PBSA results and decomposition | — |
 | `data/structures/` | AlphaFold model, prepared receptor, docked poses | — |
 

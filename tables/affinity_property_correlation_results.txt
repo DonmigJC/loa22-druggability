@@ -1,0 +1,23 @@
+Reconstruction check against the manuscript
+------------------------------------------------------------------------------
+  valid molecules (SMILES_state == 1)            6319   manuscript 6,319
+  docked molecules (reward > 0)                  6275   manuscript 6,275
+  best predicted affinity (kcal/mol)          -10.660   manuscript -10.660
+  mean affinity, all valid (kcal/mol)          -6.608   manuscript  -6.608
+  mean affinity, docked only (kcal/mol)        -6.654   manuscript  -6.654
+  mean QED, all valid                           0.691   manuscript   0.691
+
+Library-wide correlations (docked molecules only)
+------------------------------------------------------------------------------
+  Predicted affinity vs Molecular weight   n = 6275   Pearson r = -0.577 [-0.593, -0.560], Spearman rho = -0.601
+  Predicted affinity vs QED                n = 6275   Pearson r = +0.053 [+0.028, +0.078], Spearman rho = +0.060
+  Molecular weight vs QED                n = 6275   Pearson r = -0.434 [-0.454, -0.414], Spearman rho = -0.325
+
+High-affinity tail against the remainder of the library
+------------------------------------------------------------------------------
+  affinity <= -8.5 kcal/mol   n = 93 (1.48% of the docked library)
+      mean molecular weight    463.55 Da  against  317.11 Da   Mann-Whitney p = 1.03e-40
+      mean QED                  0.460     against   0.697       Mann-Whitney p = 1.08e-23
+  affinity <= -9.0 kcal/mol   n = 21 (0.33% of the docked library)
+      mean molecular weight    536.22 Da  against  318.55 Da   Mann-Whitney p = 4.72e-13
+      mean QED                  0.280     against   0.695       Mann-Whitney p = 1.28e-12
