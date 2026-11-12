@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this code or data, please cite the associated manuscript."
 title: "Loa22 druggability assessment: analysis code and data"
 version: 1.1.0
-date-released: 2026-11-11
+date-released: 2026-11-13
 license: MIT
 repository-code: "https://github.com/DonmigJC/loa22-druggability"
 identifiers:

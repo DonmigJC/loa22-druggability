@@ -241,6 +241,13 @@ reproduce the published values. It also refuses any pair of distance series
 whose lengths disagree, which guards against the truncated analysis files noted
 under Known limitations.
 
+`figS6.py` draws the workflow figure. It replaces a version whose section
+references came from a draft in which the Materials and Methods was section 2
+and the Results was section 3, so every pointer on it was wrong, and which also
+cited a table that does not exist. The script checks every number it prints
+against the manuscript and writes no file if one is missing, and it refuses to
+run if any draft-era reference reappears in its own content.
+
 `frontiers_export.py` wraps a figure script and enforces the submission figure
 rules before writing: minimum 8 pt text, 2 pt data lines, 180 mm width, RGB
 TIFF with LZW compression. Export resolution is read from `EXPORT_DPI`. Every

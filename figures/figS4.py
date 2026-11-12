@@ -6,7 +6,7 @@ Drawn from the SMILES rather than reusing earlier renders, so the depicted
 structures cannot drift from the strings deposited in Supplementary Table S5.
 Panel B shows Bemis-Murcko scaffolds computed with RDKit, not hand-drawn.
 
-Verified against main-text Table 10 at run time: molecular weight, QED and
+Verified against main-text Table 4 at run time: molecular weight, QED and
 Crippen logP must match the published values or the script aborts.
 
 Run:  conda activate reinvent4

@@ -11,7 +11,7 @@ WHY VAN DER WAALS AND NOT TOTAL:
   The van der Waals term is identical between the Generalized Born and
   Poisson-Boltzmann solvation models, whereas the TOTAL changes sign between
   them (Arg142: GB -2.736, PB +0.198). van der Waals is therefore the
-  solvation-model-invariant quantity. See Discussion 4.4.
+  solvation-model-invariant quantity. See Discussion 3.3.
 
 WHY FINAL_DECOMP.dat AND NOT DECOMP_v2.csv:
   The v2 rerun changed only the &pb namelist (inp 2->1, radiopt 0->1).
@@ -20,7 +20,7 @@ WHY FINAL_DECOMP.dat AND NOT DECOMP_v2.csv:
   FINAL_DECOMP.dat is used because it carries the SD/SEM columns directly.
 
 Run from the Research root:   python3 figS5.py
-Outputs: FigureS5.png (rep1, matches Table 20)
+Outputs: FigureS5.png (rep1, matches Supplementary Table S14)
          FigureS5_3replicate.png (all three replicates)
 """
 
