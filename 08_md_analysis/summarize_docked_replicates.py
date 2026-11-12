@@ -14,9 +14,15 @@ answer different questions:
   final departure the last crossing after which the ligand never returns below
                   0.45 nm for the remainder of the trajectory
 
-The manuscript's statement that each compound "left the functional site" refers
-to the final departure. Report that one, and keep the first crossing in the
-supplement so a reviewer can see the difference.
+Table 5's "Last pharmacophore contact" row is the final departure computed on
+sc_KeyRes, the side-chain series Materials and Methods describes, which is why
+that is the default metric. On md_KeyRes, the whole-residue series, LOA22-B2
+and LOA22-B3 differ, so the metric has to be stated whenever the number is.
+
+The first crossing is 0 ps in all nine replicates: the ligand is already beyond
+4.5 A at the first production frame, so the docked pose does not survive
+restrained equilibration in any of them. That is the stronger statement and the
+manuscript makes it.
 
 Usage:
     python3 summarize_docked_replicates.py /home/donmigcage/Research/05_MD_v2
@@ -80,7 +86,7 @@ def main():
     ap.add_argument("mdroot")
     ap.add_argument("--threshold", type=float, default=0.45,
                     help="contact threshold in nm (default 0.45, i.e. 4.5 A)")
-    ap.add_argument("--metric", default="md_KeyRes",
+    ap.add_argument("--metric", default="sc_KeyRes",
                     help="xvg basename to read (md_KeyRes, md_Asp121only, md_Arg142only)")
     args = ap.parse_args()
 

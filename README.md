@@ -189,6 +189,12 @@ the first crossing of the 4.5 Å contact threshold, the final departure and the
 fraction of frames in contact. It separates the first crossing from the final
 departure deliberately, because a brief excursion is not a departure.
 
+`analyse_conformational_stability_v2.sh` chooses its trajectory by frame count
+rather than by file name. A replicate restarted with `-noappend` can hold more
+than one concatenation and some of them are stale: LOA22-B2 replicate 1 keeps a
+4,619-frame `md_prod_full.xtc` beside the 9,984-frame `md_prod_cat.xtc` that its
+distance series used. Picking the longest is self-correcting.
+
 `analyse_conformational_stability_v2.sh` and
 `summarize_conformational_stability.py` rebuild the conformational-stability
 table from the v2 trajectories. The summary script recomputes the four

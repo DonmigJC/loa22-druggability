@@ -8,6 +8,14 @@
 # Answers: is the binding pocket stable BECAUSE a ligand is bound, or
 # is the AlphaFold model simply rigid on this timescale?
 #
+# SUPERSEDED for the v2 ligand-free runs. This script is hardwired to the v1
+# apo path, 04_Molecular_Dynamics/Apo/md_run, which used SPC/E water with two
+# chloride ions and no added salt at 300 K over 50 ns. The three replicates the
+# manuscript reports were analysed with analyse_conformational_stability_v2.sh,
+# which takes the same measurements on 06_MD_apo_v2. This file is kept because
+# the v2 script copies its method verbatim and because the v1 run is part of
+# the record.
+#
 # Run:  bash ~/Research/analyse_apo.sh
 # =====================================================================
 set -u

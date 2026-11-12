@@ -90,15 +90,22 @@ analyse_one () {
     echo "  SKIP $LABEL: no md_prod.tpr"; return
   fi
 
-  # pick the trajectory. A run restarted with -noappend leaves parts, and
-  # md_prod_full.xtc is the concatenation made at the time.
-  local TRJ=""
-  for c in md_prod_full.xtc md_prod.xtc; do
-    [ -f "$D/$c" ] && { TRJ=$D/$c; break; }
+  # Pick the trajectory by frame count, never by name. A run restarted with
+  # -noappend leaves parts and more than one concatenation can survive, some of
+  # them stale: LOA22-B2/rep1 holds a 4,619-frame md_prod_full.xtc beside a
+  # 9,984-frame md_prod_cat.xtc. Taking the longest is self-correcting.
+  local TRJ="" BEST=0 CAND NF_
+  for CAND in "$D"/md_prod_full.xtc "$D"/md_prod_cat.xtc "$D"/md_prod.xtc; do
+    [ -f "$CAND" ] || continue
+    NF_=$("$GMX" check -f "$CAND" 2>&1 | awk '/^Coords/{print $2; exit}')
+    [ -n "$NF_" ] || continue
+    echo "     candidate $(basename "$CAND"): $NF_ frames"
+    if [ "$NF_" -gt "$BEST" ]; then BEST=$NF_; TRJ=$CAND; fi
   done
   if [ -z "$TRJ" ]; then
     echo "  SKIP $LABEL: no production trajectory"; return
   fi
+  echo "     chosen: $(basename "$TRJ"), $BEST frames"
 
   if [ -f "$OUT/rmsd_bsite.xvg" ]; then
     echo "  done already: $LABEL"; return
