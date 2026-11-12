@@ -3,8 +3,12 @@
 section 2.6 free energies from the gmx_MMPBSA output files.
 
 Two questions about the free energies:
-  1. Does the paper's "+/-" use the sample SD (ddof=1) or the population SD
-     (ddof=0)? Section 4.6 promises "mean +/- standard deviation with the unit
+  1. The paper reports every across-replicate deviation as a sample standard
+     deviation (ddof=1), which section 4.6 states. Earlier drafts had the
+     end-state totals on the population estimator while the per-residue term
+     next to them used the sample one, so this check exists to keep the two
+     from drifting apart again. Section 4.6 promises "mean +/- standard
+     deviation with the unit
      of replication stated".
   2. LOA22-B1 and LOA22-B3 have only one replicate each with MMPBSA output, so
      their "+/-" cannot be a cross-replicate SD. What is it?
@@ -118,7 +122,7 @@ for rep in ("rep1_arg142pose", "rep2_arg142pose", "rep3_arg142pose"):
     if "PB" in d:
         pb.append(d["PB"])
 
-for name, vals, claim_m, claim_s in (("GB", gb, -27.63, 3.94), ("PB", pb, -17.73, 1.14)):
+for name, vals, claim_m, claim_s in (("GB", gb, -27.63, 4.82), ("PB", pb, -17.73, 1.39)):
     if len(vals) < 2:
         print("  %s: only %d value(s), cannot compute an SD" % (name, len(vals)))
         continue
@@ -142,7 +146,7 @@ for c in ("LOA22-B1", "LOA22-B2", "LOA22-B3"):
                                            "FINAL_DECOMP.dat"))]
     print("    %-10s %d replicate(s): %s" % (c, len(reps), ", ".join(reps) or "none"))
 print()
-print("  The paper reports Arg142 vdW as -2.32 +/- 0.70 (B2), -1.15 +/- 0.22 (B3)")
+print("  The paper reports Arg142 vdW as -2.32 +/- 0.69 (B2), -1.15 +/- 0.22 (B3)")
 print("  and -0.71 +/- 0.20 (B1). B1 and B3 have one replicate each, so their")
 print("  +/- cannot be a cross-replicate SD. Check what it is before the")
 print("  revision restates them, because section 4.6 promises the unit of")
