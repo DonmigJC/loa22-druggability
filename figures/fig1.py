@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 """
+SUPERSEDED by figS6.py. Kept because the figure it made is part of
+the record and because its verification approach carried over.
+
+This produced the workflow diagram, which an earlier draft numbered
+Figure 1 and which the submitted paper numbers Supplementary Figure S6.
+Its stage annotations cite a Materials and Methods numbered as section 2
+and a Results numbered as section 3, which is the draft numbering, and a
+"Table 9" that the submitted paper does not have. figS6.py redraws the
+same diagram against the current numbering.
+
 Figure 1 - computational workflow.
 
 Drawn programmatically so the counts on the diagram cannot drift from the text.
@@ -129,7 +139,7 @@ ax.text(22, 77.4, "a filtered subset, not a stage\nthe library passes through",
 arrow(45, 59, 60, 64, color=ALT, rad=-0.18)
 ax.text(62.5, 61.6, "repeated with a corrected objective", fontsize=5.9,
         color=ALT, ha="left", va="center")
-ax.text(69.5, 80.4, "reported as a separate campaign (Table 9),\nnot screened in stage 4",
+ax.text(69.5, 80.4, "reported as a separate campaign (Supplementary Table S8),\nnot screened in stage 4",
         fontsize=5.9, color=ALT, ha="center", va="top", linespacing=1.4)
 stage("3b", 71, "")
 box(46, 64, 47, 15, "Revised objective, functional-site volume",

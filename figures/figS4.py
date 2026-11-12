@@ -35,7 +35,7 @@ CLASS = {
     "LOA22-B2": "pyridine–oxadiazole",
     "LOA22-B3": "aminothiazole–carboxylate",
 }
-# main-text Table 10, used as an assertion
+# main-text Table 4, used as an assertion
 TABLE10 = {"LOA22-B1": (325.2, 0.755, 3.36),
            "LOA22-B2": (323.3, 0.762, 2.34),
            "LOA22-B3": (358.8, 0.831, 3.05)}
@@ -65,7 +65,7 @@ def draw(mol, size):
 
 names = list(SMILES)
 mols, scafs = {}, {}
-print("VERIFICATION against Table 10")
+print("VERIFICATION against Table 4")
 ok = True
 for n in names:
     m = Chem.MolFromSmiles(SMILES[n])
@@ -80,7 +80,7 @@ for n in names:
     mols[n] = m
     scafs[n] = MurckoScaffold.GetScaffoldForMol(m)
 if not ok:
-    sys.exit("ABORTED: structures do not match Table 10. Nothing written.")
+    sys.exit("ABORTED: structures do not match Table 4. Nothing written.")
 
 # sanity check the corrected scaffold name
 if not mols["LOA22-B3"].HasSubstructMatch(Chem.MolFromSmarts("c1cscn1")):

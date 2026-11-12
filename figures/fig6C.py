@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """
+SUPERSEDED by fig6C_occupancy.py, which evaluates occupancy at every
+frame instead of a 21-frame sample. Kept as part of the record.
+
 Figure 6 panel C - bridging occupancy per replicate, alternative pose set.
 
-Source: main-text Table 17. Each replicate contributes 21 frames sampled at
+Source: main-text Table 5. Each replicate contributes 21 frames sampled at
 5 ns intervals over 100 ns. A frame counts as bridging when the ligand is
 simultaneously within contact of the pharmacophoric region and of P_0.
 
@@ -15,7 +18,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-# Table 17, per replicate, out of 21 sampled frames
+# Table 5, per replicate, out of 21 sampled frames
 DATA = {"LOA22-B1": [11, 0, 20],
         "LOA22-B2": [21, 21, 21],
         "LOA22-B3": [18, 17, 20]}
@@ -24,11 +27,11 @@ ORDER = ["LOA22-B1", "LOA22-B2", "LOA22-B3"]
 NFRAMES = 21
 INK, MUTED = "#1a1a1a", "#5a5a5a"
 
-# totals must agree with Table 17
+# totals must agree with Table 5
 EXPECTED_TOTAL = {"LOA22-B1": 31, "LOA22-B2": 63, "LOA22-B3": 55}
 for k, v in DATA.items():
-    assert sum(v) == EXPECTED_TOTAL[k], "%s total %d does not match Table 17" % (k, sum(v))
-print("totals verified against Table 17:",
+    assert sum(v) == EXPECTED_TOTAL[k], "%s total %d does not match Table 5" % (k, sum(v))
+print("totals verified against Table 5:",
       ", ".join("%s %d/63" % (k, sum(DATA[k])) for k in ORDER))
 
 fig, ax = plt.subplots(figsize=(7.2, 4.4))

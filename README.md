@@ -257,6 +257,19 @@ submitted TIFF was produced through it, so it is required to regenerate them.
 sequence-alignment figure and the final version of panel A of the cavity
 figure.
 
+Script names follow the figure numbers of an earlier draft, which the
+submitted paper renumbered. The mapping is:
+
+| Submitted figure | Script |
+|---|---|
+| Figure 1, cavity and functional site | `fig2.pml`, `fig2A_polish.pml`, `fig2D_chart.py`, `assemble_fig2.py` |
+| Figure 2, learning against affinity | `fig3.py` |
+| Figure 3, library-wide site preference | `fig4.py` |
+| Figure 4, docking-protocol validation | `fig5.py` |
+| Figure 5, dynamics | `fig6.py`, `fig6C_occupancy.py`, `fig6D.pml`, `assemble_fig6.py` |
+| Supplementary Figures S1 to S5 | `figS1.py`, `figS2.py`, `figS3.pml` with `assemble_figS3.py`, `figS4.py`, `figS5.py` |
+| Supplementary Figure S6, workflow | `figS6.py`, replacing `fig1.py` |
+
 ### superseded
 
 Earlier script versions retained for transparency, each replaced because it

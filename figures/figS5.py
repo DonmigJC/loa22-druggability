@@ -35,7 +35,7 @@ import numpy as np
 # ----------------------------------------------------------------- constants
 BASE = "05_MD_v2/LOA22-B2"
 REPS = ["rep1_arg142pose", "rep2_arg142pose", "rep3_arg142pose"]
-PRIMARY = "rep1_arg142pose"          # the replicate Table 20 reports
+PRIMARY = "rep1_arg142pose"          # the replicate Supplementary Table S14 reports
 HIGHLIGHT = "R:A:ARG:142"
 TOP_N = 15                            # residues shown in the main panel
 
@@ -44,7 +44,7 @@ TERMS = ["Internal", "van der Waals", "Electrostatic",
          "Polar Solvation", "Non-Polar Solv.", "TOTAL"]
 COL = {t: (1 + 3 * i, 2 + 3 * i, 3 + 3 * i) for i, t in enumerate(TERMS)}
 
-# Values independently confirmed against Table 20. The script refuses to write
+# Values independently confirmed against Supplementary Table S14. The script refuses to write
 # a figure if the parse drifts from these. Do not "fix" by loosening tolerance.
 EXPECT = {"van der Waals": (-1.715, 0.255), "TOTAL": (-2.736, 2.361)}
 TOL = 0.005
@@ -122,7 +122,7 @@ def main():
         print("  %-16s %8.3f +/- %-6.3f  expected %8.3f +/- %-6.3f  %s"
               % (term, avg, sem, exp_avg, exp_sem, "OK" if good else "MISMATCH"))
     if not ok:
-        sys.exit("ABORTED: parsed values do not match Table 20. Nothing written.")
+        sys.exit("ABORTED: parsed values do not match Supplementary Table S14. Nothing written.")
 
     # cross-replicate mean of the van der Waals term (Discussion 4.4)
     vals = [data[r][HIGHLIGHT]["van der Waals"][0] for r in REPS]
