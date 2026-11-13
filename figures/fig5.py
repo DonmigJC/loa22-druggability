@@ -125,8 +125,9 @@ p0 = [f[5] for f in FRAG]
 b.bar(x - w / 2, site, w, color=RED, label="functional site",
       yerr=serr, error_kw=dict(ecolor="#333333", lw=1, capsize=3))
 b.bar(x + w / 2, p0, w, color=BLUE, label="P₀")
-for xi, v in zip(x - w / 2, site):
-    b.text(xi, v - 0.12, "%.2f" % v, ha="center", va="top", fontsize=7.5)
+# the label clears the error bar where there is one
+for xi, v, e in zip(x - w / 2, site, serr):
+    b.text(xi, v - e - 0.16, "%.2f" % v, ha="center", va="top", fontsize=7.5)
 for xi, v in zip(x + w / 2, p0):
     b.text(xi, v - 0.12, "%.2f" % v, ha="center", va="top", fontsize=7.5)
 b.set_xticks(x)
